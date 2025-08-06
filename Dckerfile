@@ -1,0 +1,24 @@
+# Usa uma imagem base com Python 3.9
+FROM python:3.9-slim
+
+# Instala o Tesseract OCR e todos os pacotes de idiomas
+# Use os comandos apt-get listados em seus arquivos
+RUN apt-get update && apt-get install -y \
+    tesseract-ocr \
+    tesseract-ocr-eng \
+    tesseract-ocr-por \
+    tesseract-ocr-jpn \
+    tesseract-ocr-chi-sim \
+    tesseract-ocr-kor \
+    tesseract-ocr-spa
+
+# Define o diretório de trabalho dentro do container
+WORKDIR /app
+
+# Copia o arquivo requirements.txt para o container
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia o restante do código da sua aplicação para o container
+COPY . .
+CMD ["gunicorn", "main:app"]

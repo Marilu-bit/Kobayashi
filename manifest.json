@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Tradutor de Imagens",
+    "version": "4.0",
+    "description": "Traduz texto de imagens capturadas da tela.",
+    "permissions": [
+      "activeTab",
+      "scripting",
+      "tabs"
+    ],
+    "host_permissions": [
+      "<all_urls>"
+    ],
+    "action": {
+      "default_popup": "templates/popup.html"
+    },
+    "content_security_policy": {
+      "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
+    }
+  }

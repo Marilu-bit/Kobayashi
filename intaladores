@@ -1,0 +1,60 @@
+Instaladores:
+pip install Pillow pyautogui pytesseract "googletrans==4.0.0-rc1" Flask Flask-CORS
+
+sudo apt-get install tesseract-ocr
+
+   * Para inglês (en):sudo apt-get install tesseract-ocr-eng
+ 	
+   * Para português (pt):sudo apt-get install tesseract-ocr-por
+ 	
+   * Para japonês (ja):sudo apt-get install tesseract-ocr-jpn
+ 	
+   * Para chinês (zh):
+    sudo apt-get install tesseract-ocr-chi-sim  # Chinês simplificado
+ 	sudo apt-get install tesseract-ocr-chi-tra  # Chinês tradicional
+ 	
+   * Para coreano (ko):sudo apt-get install tesseract-ocr-kor
+ 	
+   * Para espanhol (es):sudo apt-get install tesseract-ocr-spa
+
+Resumo: 
+Extensão do Google capaz de fazer tradução de manguás.
+Para fazer a tradução, o usuario seleciona o idioma do manguá e para 
+qual idioma deve traduzir, então clica em traduzir. O botão vai 
+iniciar o código javascript que registra os dois idiomas e tira 
+o print pelo chrome.tabs.captureVisibleTab, ele manda através do json
+para o python que tira o print, identifica o texto na imagem(Pytesseract)
+e traduz o texto(Google) e com o Pillow ocorre as alterações na imagem
+que no final é mandada de volta para o javascript,
+que vai atualizar o html (ou seja, apresentar a tradução 
+para o usuario. 
+ 
+Fluxo de Trabalho da Extensão:
+
+    Usuário abre o pop-up: Ao clicar no ícone da extensão, o popup.html é carregado.
+
+    Seleção de Idiomas: O usuário seleciona o idioma do mangá (idioma atual) e o idioma para o qual deseja traduzir (idioma novo) nos menus suspensos.
+
+    Clique em "Traduzir Imagem": O usuário clica no botão "Traduzir Imagem", que executa a função BotaoTraduzir() no javascript.js.
+
+    Requisição ao Servidor: O JavaScript envia uma requisição POST com os idiomas selecionados para o servidor Flask, na rota /traduzir.
+
+    Processamento no Servidor (Python):
+
+        O Flask recebe a requisição na função traduzir_imagem.
+
+        A função capturar_traduzir é chamada.
+
+        O pyautogui tira um print da tela.
+
+        O pytesseract tenta identificar o texto na imagem capturada, usando o idioma original.
+
+        A biblioteca googletrans traduz o texto reconhecido para o idioma de destino.
+
+        A imagem traduzido (ou uma mensagem de erro) é retornado como JSON ao JavaScript.
+
+    Atualização da Interface (JavaScript e HTML):
+
+        O JavaScript recebe a resposta do servidor.
+
+        O TextoTraduzido no popup.html é atualizado com a imagem traduzido, e o status é atualizado para "Tradução concluída!" ou com uma mensagem de erro.

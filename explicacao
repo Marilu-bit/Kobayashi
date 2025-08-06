@@ -1,0 +1,8 @@
+Essa verão é capaz de fazer tradução de imagens, para isso o 
+chrome.tabs.captureVisibleTab tira um print da tela, o tesseract.js 
+identiifica o texto e o google_Translation faz a tradução desse 
+texto, por ser uma versão teste ele identifica apenas 5 linguas.
+Depois disso o código desponibiliza a imagem traduzida no popup.
+
+Problema da versão: O texto traduzido que aparece na imagem é mal
+ colocada e, algumas vezes, aparenta erro na tradução.
