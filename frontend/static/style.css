@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    min-width: 300px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#status {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#Print img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+#TextoTraduzido {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
